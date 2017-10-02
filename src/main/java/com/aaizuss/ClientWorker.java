@@ -22,13 +22,20 @@ public class ClientWorker implements Runnable {
     public void run() {
         try {
             Request request = buildRequestFromInput();
-            // todo: handle the request (write response) via router
+            respondToRequest(request);
             closeIO();
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
             closeSocket();
         }
+    }
+
+    private void respondToRequest(Request request) {
+        // todo: add class for changing resources
+        Response response = router.getResponse(request);
+        ResponseSerializer serializer = new ResponseSerializer(response);
+        writer.write(serializer.getResponseBytes());
     }
 
     private Request buildRequestFromInput() throws IOException {
@@ -43,7 +50,6 @@ public class ClientWorker implements Runnable {
             System.err.println("Cannot get input stream");
             e.printStackTrace();
         }
-
     }
 
     private void closeSocket() {

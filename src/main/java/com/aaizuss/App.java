@@ -5,10 +5,9 @@ import java.io.IOException;
 public class App {
 
     public static void main(String[] args) throws IOException {
-        System.out.println( "Hello World!" );
         int port = ArgParser.getPort(args, 5000);
         Router router = setupRouter();
-        Server server = new Server();
+        Server server = new Server(router);
         server.run(port);
     }
 
