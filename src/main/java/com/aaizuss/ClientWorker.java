@@ -10,17 +10,19 @@ public class ClientWorker implements Runnable {
     private Socket socket;
     private BufferedReader reader;
     private ResponseWriter writer;
+    private Router router;
 
-    public ClientWorker(Socket clientSocket) {
-        socket = clientSocket;
+    public ClientWorker(Socket clientSocket, Router router) {
+        this.socket = clientSocket;
         this.writer = new ResponseWriter(socket);
+        this.router = router;
         setupRequestReader();
     }
 
     public void run() {
         try {
             Request request = buildRequestFromInput();
-            // handle the request (write response)
+            // todo: handle the request (write response) via router
             closeIO();
         } catch (IOException e) {
             e.printStackTrace();

@@ -1,6 +1,5 @@
 package com.aaizuss;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
@@ -10,77 +9,49 @@ import static org.junit.Assert.assertEquals;
 
 public class ArgParserTest {
 
-    private ArgParser argParser;
+    private static int DEFAULT_PORT = 5000;
+    private static String DEFAULT_DIRECTORY = System.getProperty("user.dir") + "/public/";
 
-    private String customPath = System.getProperty("user.dir") + "/fun-stuff/";
-    private String defaultDirectory = System.getProperty("user.dir") + "/public/";
+    private String customPath = System.getProperty("user.dir") + "/test-directory/";
+
     private String[] args = new String[] {"-p", "9090", "-d", customPath};
     private String[] portArg = new String[] {"-p", "5050"};
     private String[] invalidPortArg = new String[] {"-p", "nope"};
 
-    @Before
-    public void setUp() throws Exception {
-        argParser = new ArgParser();
-    }
-
     @Test
-    public void testDefaultPort() throws Exception {
-        assertEquals(5000, argParser.getPort());
-    }
-
-    @Test
-    public void testInvalidPort() throws Exception {
-        argParser.parseArguments(invalidPortArg);
-        assertEquals(5000, argParser.getPort());
+    public void testGetPortWithInvalidPortArgReturnsDefaultPort() throws Exception {
+        assertEquals(5000, ArgParser.getPort(invalidPortArg, DEFAULT_PORT));
     }
 
     @Test
     public void testOnlyPortArg() throws Exception {
-        argParser.parseArguments(portArg);
-        assertEquals(5050, argParser.getPort());
-        assertEquals(defaultDirectory, argParser.getDirectory());
+        assertEquals(5050, ArgParser.getPort(portArg, DEFAULT_PORT));
+        assertEquals(DEFAULT_DIRECTORY, ArgParser.getDirectory(portArg, DEFAULT_DIRECTORY));
     }
 
     @Test
-    public void testDefaultDirectory() throws Exception {
-        assertEquals(defaultDirectory, argParser.getDirectory());
+    public void testGetDirectoryWithNoDirectoryArgReturnsDefaultDirectory() throws Exception {
+        assertEquals(DEFAULT_DIRECTORY, ArgParser.getDirectory(portArg, DEFAULT_DIRECTORY));
     }
 
     @Test
-    public void testPortFromArgs() throws Exception {
-        argParser.parseArguments(args);
-        assertEquals(9090, argParser.getPort());
+    public void testGetPortFromArgs() throws Exception {
+        int port = ArgParser.getPort(args, DEFAULT_PORT);
+        assertEquals(9090, port);
     }
 
     @Test
-    public void testDirectoryFromArgs() throws Exception {
-        argParser.parseArguments(args);
-        assertEquals(customPath, argParser.getDirectory());
+    public void testGetDirectoryFromArgs() throws Exception {
+        assertEquals(customPath, ArgParser.getDirectory(args, DEFAULT_DIRECTORY));
     }
 
-    @Test
-    public void testDirectoryAndPortFromArgs() throws Exception {
-        argParser.parseArguments(args);
-        assertEquals(9090, argParser.getPort());
-        assertEquals(customPath, argParser.getDirectory());
-    }
 
     @Test
     public void testPrintArguments() throws Exception {
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         System.setOut(new PrintStream(output));
-        argParser.printConfig();
-        String expected = "Server listening on port: 5000\nDirectory Path: " + defaultDirectory + "\n";
-        assertEquals(expected, output.toString());
-    }
-
-    @Test
-    public void testPrintCustomArguments() throws Exception {
-        argParser.parseArguments(args);
-        ByteArrayOutputStream output = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(output));
-        argParser.printConfig();
-        String expected = "Server listening on port: 9090\nDirectory Path: " + customPath + "\n";
+        ArgParser.printConfig(DEFAULT_PORT, DEFAULT_DIRECTORY);
+        String expected = "Server listening on port: 5000\nDirectory Path: " + DEFAULT_DIRECTORY + "\n";
         assertEquals(expected, output.toString());
     }
 }

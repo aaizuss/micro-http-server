@@ -10,6 +10,11 @@ import java.util.concurrent.Executors;
 public class Server {
 
     private ServerSocket listener;
+    private Router router;
+
+    public Server(Router router) {
+        this.router = router;
+    }
 
     // https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ExecutorService.html
     public void run(int port) throws IOException {
@@ -17,7 +22,7 @@ public class Server {
         try {
             while (true) {
                 Socket clientSocket = listener.accept();
-                ClientWorker clientWorker = new ClientWorker(clientSocket);
+                ClientWorker clientWorker = new ClientWorker(clientSocket, router);
                 ExecutorService pool = Executors.newFixedThreadPool(5);
                 pool.execute(clientWorker);
             }
