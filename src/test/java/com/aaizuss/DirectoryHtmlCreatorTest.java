@@ -11,24 +11,24 @@ public class DirectoryHtmlCreatorTest {
     private Directory funDirectory;
     private Directory puppiesDirectory;
 
-    private void setUpPuppiesCreator() throws Exception {
+    private void setUpPuppiesCreator() throws DirectoryNotFoundException {
         htmlCreator = new DirectoryHtmlCreator(puppiesDirectory, rootDirectory);
     }
 
-    private void makePuppiesDirectory() throws Exception {
+    private void makePuppiesDirectory() throws DirectoryNotFoundException {
         puppiesDirectory = new Directory(System.getProperty("user.dir") + "/test-directory/puppies/");
     }
 
-    private void makeFunDirectory() throws Exception {
+    private void makeFunDirectory() throws DirectoryNotFoundException {
         funDirectory = new Directory(System.getProperty("user.dir") + "/fun-stuff/");
     }
 
-    private void makeRootDirectory() throws Exception {
+    private void makeRootDirectory() throws DirectoryNotFoundException {
         rootDirectory= new Directory(System.getProperty("user.dir") + "/test-directory/");
     }
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() throws DirectoryNotFoundException {
         makePuppiesDirectory();
         makeFunDirectory();
         makeRootDirectory();
@@ -54,7 +54,7 @@ public class DirectoryHtmlCreatorTest {
     }
 
     @Test
-    public void testGetLinkStringNestedFolder() throws Exception {
+    public void testGetLinkStringNestedFolder() throws DirectoryNotFoundException {
         Directory nestedDirectory = new Directory(System.getProperty("user.dir") + "/fun-stuff/journey/");
         DirectoryHtmlCreator funCreator = new DirectoryHtmlCreator(nestedDirectory, funDirectory);
         String expected = "<a href='/'>< Back to Root</a></br>\r\n" +
@@ -63,7 +63,7 @@ public class DirectoryHtmlCreatorTest {
     }
 
     @Test
-    public void testGetLinkStringForNestedFolderInFunDirectory() throws Exception {
+    public void testGetLinkStringForNestedFolderInFunDirectory() throws DirectoryNotFoundException {
         Directory nestedDirectory = new Directory(System.getProperty("user.dir") + "/fun-stuff/journey/come/inside/");
         DirectoryHtmlCreator funCreator = new DirectoryHtmlCreator(nestedDirectory, funDirectory);
         String expected = "<a href='/journey/come/inside/..'>< Back</a></br>\r\n" +

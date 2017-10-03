@@ -13,7 +13,7 @@ public class Directory {
         this.contents = initContents();
     }
 
-    public Directory(String directoryPath) throws Exception {
+    public Directory(String directoryPath) throws DirectoryNotFoundException {
         checkDirectory(directoryPath);
         this.pathString = directoryPath;
         this.contents = initContents();
@@ -34,6 +34,7 @@ public class Directory {
 
     public boolean containsResource(String uri) {
         String targetPath = getPathToResource(uri);
+        System.out.println("looking for " + targetPath);
         File file = new File(targetPath);
         return file.exists();
     }
@@ -85,10 +86,10 @@ public class Directory {
         }
     }
 
-    private void checkDirectory(String directoryPath) throws Exception {
+    private void checkDirectory(String directoryPath) throws DirectoryNotFoundException {
         File file = new File(directoryPath);
         if (!file.exists()) {
-            throw new Exception("Cannot find directory " + directoryPath + "!");
+            throw new DirectoryNotFoundException(directoryPath);
         }
     }
 

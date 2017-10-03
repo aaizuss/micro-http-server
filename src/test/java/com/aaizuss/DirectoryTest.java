@@ -13,7 +13,7 @@ public class DirectoryTest {
     private Directory directory;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() throws DirectoryNotFoundException {
         directory = new Directory(System.getProperty("user.dir") + "/test-directory/");
     }
 
@@ -59,7 +59,7 @@ public class DirectoryTest {
 
 
     @Test
-    public void testGetParentPathRestrictions() throws Exception {
+    public void testGetParentPathRestrictions() throws DirectoryNotFoundException{
         Directory inner = new Directory(System.getProperty("user.dir") + "/test-directory/puppies/");
         assertEquals("", directory.getParentPathString(directory));
         assertEquals("/", inner.getParentPathString(directory));
