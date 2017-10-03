@@ -19,6 +19,12 @@ public class Response {
         this.headers = headers;
     }
 
+    public Response(String status) {
+        this.status = status;
+        this.headers = new Hashtable<>();
+        this.body = "".getBytes();
+    }
+
     public Response() {
         this.headers = new Hashtable<>();
         this.body = "".getBytes();
