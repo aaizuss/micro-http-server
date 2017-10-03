@@ -1,4 +1,4 @@
-package com.aaizuss;
+package com.aaizuss.exception;
 
 public class DirectoryNotFoundException extends Exception {
 

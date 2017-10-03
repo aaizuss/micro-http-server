@@ -1,5 +1,7 @@
 package com.aaizuss;
 
+import com.aaizuss.handler.Handler;
+
 public class MockHandler implements Handler {
     private Request request;
 

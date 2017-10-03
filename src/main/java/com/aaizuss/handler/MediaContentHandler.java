@@ -1,4 +1,6 @@
-package com.aaizuss;
+package com.aaizuss.handler;
+
+import com.aaizuss.*;
 
 public class MediaContentHandler implements Handler {
     private Request request;

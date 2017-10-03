@@ -1,5 +1,6 @@
 package com.aaizuss;
 
+import com.aaizuss.exception.DirectoryNotFoundException;
 import org.junit.Before;
 import org.junit.Test;
 

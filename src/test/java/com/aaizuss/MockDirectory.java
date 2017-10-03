@@ -1,5 +1,7 @@
 package com.aaizuss;
 
+import com.aaizuss.exception.DirectoryNotFoundException;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;

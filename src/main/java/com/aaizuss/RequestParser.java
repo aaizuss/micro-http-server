@@ -1,5 +1,7 @@
 package com.aaizuss;
 
+import com.aaizuss.decoder.ParameterDecoder;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.aaizuss;
+package com.aaizuss.decoder;
 
 import java.util.ArrayList;
 import java.util.Hashtable;

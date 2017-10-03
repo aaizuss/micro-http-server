@@ -1,5 +1,6 @@
 package com.aaizuss;
 
+import com.aaizuss.handler.Handler;
 import org.junit.Before;
 import org.junit.Test;
 

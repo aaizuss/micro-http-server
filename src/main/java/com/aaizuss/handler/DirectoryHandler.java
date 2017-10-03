@@ -1,4 +1,6 @@
-package com.aaizuss;
+package com.aaizuss.handler;
+
+import com.aaizuss.*;
 
 public class DirectoryHandler implements Handler {
     private DirectoryHtmlCreator htmlCreator;

@@ -32,7 +32,7 @@ public class ClientWorker implements Runnable {
     }
 
     private void respondToRequest(Request request) {
-        // todo: add class for changing resources
+        // todo: add class for creating/changing resources to support PUT, POST, DELETE
         Response response = router.getResponse(request);
         ResponseSerializer serializer = new ResponseSerializer(response);
         writer.write(serializer.getResponseBytes());

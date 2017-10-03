@@ -1,5 +1,9 @@
-package com.aaizuss;
+package com.aaizuss.handler;
 
+import com.aaizuss.*;
+import com.aaizuss.exception.DirectoryNotFoundException;
+
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -21,7 +25,7 @@ public class MediaContentHandlerTest {
     public void testResponseHeaderAndStatus() {
         handler = new MediaContentHandler(pngRequest, directory);
         Response response = handler.execute();
-        assertEquals(Status.OK, response.getStatus());
+        Assert.assertEquals(Status.OK, response.getStatus());
         assertEquals("image/png", response.getHeader(Header.CONTENT_TYPE));
     }
 

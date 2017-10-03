@@ -1,5 +1,6 @@
-package com.aaizuss;
+package com.aaizuss.decoder;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -12,6 +13,6 @@ public class ParameterDecoderTest {
                 "2C%20%40%2C%20%23%2C%20%24%2C%20%5B%2C%20%5D%3A%20%22is%20that%20all%22%3F&variable_2=stuff";
 
         String expected = "variable_1 = Operators <, >, =, !=; +, -, *, &, @, #, $, [, ]: \"is that all\"?\nvariable_2 = stuff";
-        assertEquals(expected, ParameterDecoder.decode(lotsOfParams));
+        Assert.assertEquals(expected, ParameterDecoder.decode(lotsOfParams));
     }
 }
