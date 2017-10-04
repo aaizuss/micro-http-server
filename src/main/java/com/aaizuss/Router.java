@@ -22,7 +22,7 @@ public class Router {
         if (handler == null) {
             return new Response(Status.NOT_FOUND);
         }
-        return handler.execute();
+        return handler.execute(request);
     }
 
     public Handler getHandler(Request request) {
