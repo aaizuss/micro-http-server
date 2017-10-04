@@ -1,26 +1,36 @@
 package com.aaizuss;
 
+import com.aaizuss.handler.Handler;
+import com.aaizuss.http.RequestMethods;
+import com.aaizuss.http.Response;
+
 import java.io.IOException;
 
-// i think a user should create an app class like this
-// they choose a port, a directory if they want
-// and add routes to the router
-
-// OR i can provide a bunch of methods in this App class for adding routes, and then to make an app
-// with this server, a user instantiates an App and calls App.run() (run would set up the server and run it)
-public class App {
-
-    public static void main(String[] args) throws IOException {
-        int port = ArgParser.getPort(args, 5000);
-        Router router = setupRouter();
-        Server server = new Server(router);
-        server.run(port);
-    }
-
-    public static Router setupRouter() {
-        Router router = new Router();
-        // add routes
-        return router;
-    }
-
-}
+// for development purposes
+//public class App {
+//
+//    public static void main(String[] args) {
+//        int port = ArgParser.getPort(args, 5000);
+//        Router router = setupRouter();
+//        Server server = new Server(router);
+//        try {
+//            server.run(port);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//    }
+//
+//    public static Router setupRouter() {
+//        Router router = new Router();
+//        router.addRoute(RequestMethods.GET, "/", new MyHandler());
+//        return router;
+//    }
+//
+//    public static class MyHandler implements Handler {
+//        public Response execute() {
+//            return new Response(Status.OK);
+//        }
+//    }
+//
+//}

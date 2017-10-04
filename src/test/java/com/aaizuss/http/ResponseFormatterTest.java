@@ -1,12 +1,12 @@
-package com.aaizuss;
+package com.aaizuss.http;
 
-import com.aaizuss.http.Response;
+import com.aaizuss.Header;
+import com.aaizuss.Status;
 import org.junit.Test;
-
 
 import static org.junit.Assert.assertEquals;
 
-public class ResponseSerializerTest {
+public class ResponseFormatterTest {
 
     private Response simpleResponse() {
         Response response = new Response(Status.OK);
@@ -16,10 +16,9 @@ public class ResponseSerializerTest {
     }
 
     @Test
-    public void testGetResponseBytes() {
-        ResponseSerializer serializer = new ResponseSerializer(simpleResponse());
+    public void testFormat() {
+        ResponseFormatter formatter = new ResponseFormatter(simpleResponse());
         String expectedString = "HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\n\r\nresponse body";
-
-        assertEquals(expectedString, new String(serializer.getResponseBytes()));
+        assertEquals(expectedString, formatter.format());
     }
 }

@@ -1,5 +1,7 @@
 package com.aaizuss;
 
+import com.aaizuss.http.Response;
+
 import java.util.Hashtable;
 import java.util.Map;
 

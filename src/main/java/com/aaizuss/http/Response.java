@@ -1,4 +1,4 @@
-package com.aaizuss;
+package com.aaizuss.http;
 
 import java.util.Hashtable;
 

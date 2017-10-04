@@ -1,6 +1,6 @@
 package com.aaizuss.handler;
 
-import com.aaizuss.Response;
+import com.aaizuss.http.Response;
 
 public interface Handler {
 

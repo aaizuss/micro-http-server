@@ -1,5 +1,6 @@
-package com.aaizuss;
+package com.aaizuss.http;
 
+import com.aaizuss.Header;
 import com.aaizuss.decoder.ParameterDecoder;
 
 import java.io.BufferedReader;
@@ -76,7 +77,11 @@ public class RequestParser {
     }
 
     private boolean hasBody(Request request) {
-        return request.getHeaders().containsKey(Header.CONTENT_LENGTH);
+        if (request.getHeaders() != null) {
+            return request.getHeaders().containsKey(Header.CONTENT_LENGTH);
+        } else {
+            return false;
+        }
     }
 
 }

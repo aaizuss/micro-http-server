@@ -1,4 +1,4 @@
-package com.aaizuss;
+package com.aaizuss.http;
 
 public class RequestMethods {
     public static final String GET = "GET";
