@@ -1,6 +1,9 @@
 package com.aaizuss.handler;
 
 import com.aaizuss.*;
+import com.aaizuss.http.Request;
+import com.aaizuss.http.RequestMethods;
+import com.aaizuss.http.Response;
 
 public class MediaContentHandler implements Handler {
     private Request request;

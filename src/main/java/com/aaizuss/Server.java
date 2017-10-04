@@ -38,6 +38,7 @@ public class Server {
         } catch (BindException e) {
             e.printStackTrace();
         }
+        System.out.println("returning null from setup listener!!! bad!");
         return null;
     }
 

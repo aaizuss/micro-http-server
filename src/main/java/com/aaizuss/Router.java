@@ -1,6 +1,8 @@
 package com.aaizuss;
 
 import com.aaizuss.handler.Handler;
+import com.aaizuss.http.Request;
+import com.aaizuss.http.Response;
 
 import java.util.Hashtable;
 
@@ -26,6 +28,9 @@ public class Router {
     // or i can implement that elsewhere
     public Response getResponse(Request request) {
         Handler handler = getHandler(request);
+        if (handler == null) {
+            return new Response(Status.NOT_FOUND);
+        }
         return handler.execute();
     }
 
