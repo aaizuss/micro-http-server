@@ -17,21 +17,19 @@ public class Router {
         this.routes = routes;
     }
 
-    public Handler getHandler(Request request) {
-        String uri = request.getUri();
-        String method = request.getMethod();
-        String key = method + " " + uri;
-        return routes.get(key);
-    }
-
-    // theoretically could return a not found response here if the route doesn't exist
-    // or i can implement that elsewhere
     public Response getResponse(Request request) {
         Handler handler = getHandler(request);
         if (handler == null) {
             return new Response(Status.NOT_FOUND);
         }
         return handler.execute();
+    }
+
+    public Handler getHandler(Request request) {
+        String uri = request.getUri();
+        String method = request.getMethod();
+        String key = method + " " + uri;
+        return routes.get(key);
     }
 
     public void addRoute(String method, String uri, Handler handler) {
