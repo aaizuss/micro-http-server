@@ -6,6 +6,7 @@ import org.junit.Test;
 import java.util.Hashtable;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class RequestTest {
@@ -64,5 +65,20 @@ public class RequestTest {
         int end = contentRange.get("End");
         assertEquals(10, start);
         assertEquals(25, end);
+    }
+
+    @Test
+    public void testGetContentRangeNoRange() {
+        Hashtable<String,Integer> contentRange = request.getContentRange();
+        assertTrue(contentRange.isEmpty());
+        assertFalse(request.isPartial());
+    }
+
+    @Test
+    public void testIsPartial() {
+        request.addHeader("Content-Range", "bytes=10-25/50");
+        Hashtable<String,Integer> contentRange = request.getContentRange();
+
+        assertTrue(request.isPartial());
     }
 }

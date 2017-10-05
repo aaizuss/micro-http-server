@@ -81,6 +81,10 @@ public class Request {
         return contentRange;
     }
 
+    public boolean isPartial() {
+        return !getContentRange().isEmpty();
+    }
+
     public void setMethod(String method) {
         this.method = method;
     }
