@@ -7,4 +7,5 @@ public class Header {
     public static final String CONTENT_RANGE = "Content-Range";
     public static final String ALLOW = "Allow";
     public static final String LOCATION = "Location";
+    public static final String IF_MATCH = "If-Match";
 }
