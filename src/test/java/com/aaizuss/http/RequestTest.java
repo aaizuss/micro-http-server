@@ -1,9 +1,9 @@
 package com.aaizuss.http;
 
-import com.aaizuss.http.Request;
-import com.aaizuss.http.RequestMethods;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.Hashtable;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -56,4 +56,13 @@ public class RequestTest {
         assertEquals("", request.getBody());
     }
 
+    @Test
+    public void testGetContentRange() {
+        request.addHeader("Content-Range", "bytes=10-25/50");
+        Hashtable<String,Integer> contentRange = request.getContentRange();
+        int start = contentRange.get("Start");
+        int end = contentRange.get("End");
+        assertEquals(10, start);
+        assertEquals(25, end);
+    }
 }
