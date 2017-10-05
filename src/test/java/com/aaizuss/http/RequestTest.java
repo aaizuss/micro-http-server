@@ -59,7 +59,7 @@ public class RequestTest {
 
     @Test
     public void testGetContentRange() {
-        request.addHeader("Content-Range", "bytes=10-25/50");
+        request.addHeader("Range", "bytes=10-25/50");
         Hashtable<String,Integer> contentRange = request.getContentRange();
         int start = contentRange.get("Start");
         int end = contentRange.get("End");
@@ -76,8 +76,7 @@ public class RequestTest {
 
     @Test
     public void testIsPartial() {
-        request.addHeader("Content-Range", "bytes=10-25/50");
-        Hashtable<String,Integer> contentRange = request.getContentRange();
+        request.addHeader("Range", "bytes=10-25/50");
 
         assertTrue(request.isPartial());
     }

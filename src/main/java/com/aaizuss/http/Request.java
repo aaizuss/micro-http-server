@@ -70,7 +70,7 @@ public class Request {
     }
 
     public Hashtable<String, Integer> getContentRange() {
-        String header = getHeader(Header.CONTENT_RANGE);
+        String header = getHeader(Header.RANGE);
         contentRange = new Hashtable<>();
 
         if (header != null) {

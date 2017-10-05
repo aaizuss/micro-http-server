@@ -14,7 +14,7 @@ public class ContentRangeTest {
         range.put(ContentRange.START, 5);
         range.put(ContentRange.END, 12);
         int[] result = ContentRange.getRange(range, 30);
-        int[] expected = {5, 12};
+        int[] expected = {5, 13};
         assertEquals(expected[0], result[0]);
         assertEquals(expected[1], result[1]);
     }

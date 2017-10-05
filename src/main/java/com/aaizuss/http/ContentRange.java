@@ -11,7 +11,7 @@ public class ContentRange {
         int[] result = new int[2];
         if (hasStartAndEnd(range)) {
             result[0] = range.get(START);
-            result[1] = range.get(END);
+            result[1] = range.get(END) + 1;
         } else if (hasOnlyStart(range)) {
             result[0] = range.get(START);
             result[1] = contentLength;
