@@ -1,5 +1,7 @@
 package com.aaizuss.http;
 
+import com.aaizuss.Header;
+
 import java.util.Hashtable;
 import java.util.Objects;
 
@@ -10,6 +12,7 @@ public class Request {
     private String body;
     private String method;
     private String params;
+    private Hashtable<String,Integer> contentRange;
 
     public Request() {
         headers = new Hashtable<>();
@@ -66,6 +69,22 @@ public class Request {
         return getHeaders().get(fieldName);
     }
 
+    public Hashtable<String, Integer> getContentRange() {
+        String header = getHeader(Header.RANGE);
+        contentRange = new Hashtable<>();
+
+        if (header != null) {
+            String[] rangeValues = RangeParser.getRangeValues(header);
+            setContentRange(rangeValues);
+        }
+
+        return contentRange;
+    }
+
+    public boolean isPartial() {
+        return !getContentRange().isEmpty();
+    }
+
     public void setMethod(String method) {
         this.method = method;
     }
@@ -88,6 +107,18 @@ public class Request {
 
     public Hashtable<String, String> getHeaders() {
         return headers;
+    }
+
+    private void setContentRange(String[] rangeValues) {
+        String start = rangeValues[0];
+        String end = rangeValues[1];
+
+        if (start.length() > 0) {
+            contentRange.put(ContentRange.START, Integer.parseInt(start));
+        }
+        if (end.length() > 0) {
+            contentRange.put(ContentRange.END, Integer.parseInt(end));
+        }
     }
 
     @Override

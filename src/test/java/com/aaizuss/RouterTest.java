@@ -21,8 +21,8 @@ public class RouterTest {
 
     @Test
     public void testAddRoute() {
-        router.addRoute("POST", "/form", new MockHandler(postRequest));
-        router.addRoute("GET", "/path/to/resource", new MockHandler(request));
+        router.addRoute("POST", "/form", new MockHandler());
+        router.addRoute("GET", "/path/to/resource", new MockHandler());
         
         assertTrue(router.getRoutes().containsKey("POST /form"));
         assertTrue(router.getRoutes().containsKey("GET /path/to/resource"));
@@ -30,7 +30,7 @@ public class RouterTest {
 
     @Test
     public void testGetHandler() {
-        router.addRoute("POST", "/form", new MockHandler(postRequest));
+        router.addRoute("POST", "/form", new MockHandler());
         Handler handler = router.getHandler(postRequest);
 
         assertTrue(handler instanceof MockHandler);
@@ -38,7 +38,7 @@ public class RouterTest {
 
     @Test
     public void testGetResponse() {
-        router.addRoute("GET", "/path/to/resource", new MockHandler(request));
+        router.addRoute("GET", "/path/to/resource", new MockHandler());
         Response response = router.getResponse(request);
 
         assertEquals(Status.OK, response.getStatus());
