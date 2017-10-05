@@ -16,7 +16,7 @@ public class ContentRange {
             result[0] = range.get(START);
             result[1] = contentLength;
         } else if (hasOnlyEnd(range)) {
-            result[0] = contentLength - (range.get(END) - 1);
+            result[0] = contentLength - (range.get(END));
             result[1] = contentLength;
         }
         return result;

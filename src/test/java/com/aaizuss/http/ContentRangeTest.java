@@ -34,7 +34,7 @@ public class ContentRangeTest {
         Hashtable<String,Integer> range = new Hashtable<>();
         range.put(ContentRange.END, 8);
         int[] result = ContentRange.getRange(range, 30);
-        int[] expected = {23, 30};
+        int[] expected = {22, 30};
         assertEquals(expected[0], result[0]);
         assertEquals(expected[1], result[1]);
     }
