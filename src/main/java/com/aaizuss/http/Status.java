@@ -1,4 +1,4 @@
-package com.aaizuss;
+package com.aaizuss.http;
 
 public class Status {
     public static final String OK = "HTTP/1.1 200 OK";

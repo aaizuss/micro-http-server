@@ -1,6 +1,5 @@
 package com.aaizuss.http;
 
-import com.aaizuss.Header;
 import com.aaizuss.decoder.ParameterDecoder;
 
 import java.io.BufferedReader;

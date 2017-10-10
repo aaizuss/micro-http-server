@@ -1,7 +1,5 @@
 package com.aaizuss.http;
 
-import com.aaizuss.Header;
-
 import java.util.Hashtable;
 import java.util.Objects;
 

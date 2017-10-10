@@ -1,8 +1,6 @@
 package com.aaizuss;
 
-import com.aaizuss.http.Request;
-import com.aaizuss.http.RequestParser;
-import com.aaizuss.http.Response;
+import com.aaizuss.http.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -36,7 +34,6 @@ public class ClientWorker implements Runnable {
     }
 
     private void respondToRequest(Request request) {
-        // todo: add class for creating/changing resources to support PUT, POST, DELETE
         Response response = router.getResponse(request);
         ResponseSerializer serializer = new ResponseSerializer(response);
         writer.write(serializer.getResponseBytes());

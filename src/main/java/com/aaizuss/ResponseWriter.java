@@ -27,7 +27,6 @@ public class ResponseWriter {
         }
     }
 
-    // not sure what the format will be yet...
     public void write(byte[] response) {
         try {
             writer.write(response);

@@ -1,6 +1,5 @@
-package com.aaizuss;
+package com.aaizuss.http;
 
-import com.aaizuss.http.Response;
 import org.junit.Test;
 
 

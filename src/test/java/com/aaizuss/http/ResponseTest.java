@@ -1,8 +1,5 @@
 package com.aaizuss.http;
 
-import com.aaizuss.Header;
-import com.aaizuss.Status;
-import com.aaizuss.http.Response;
 import org.junit.Test;
 
 import java.util.Hashtable;
