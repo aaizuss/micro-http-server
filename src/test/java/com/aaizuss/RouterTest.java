@@ -47,7 +47,7 @@ public class RouterTest {
     }
 
     @Test
-    public void testGetRespo() {
+    public void testGetResponseTwo() {
         router.addRoute("GET", "/path/to/resource", new MockHandler(Status.OK));
         router.addRoute("DELETE", "/image", new MockHandler(Status.METHOD_NOT_ALLOWED));
         Request deleteRequest = new Request("DELETE", "/image");

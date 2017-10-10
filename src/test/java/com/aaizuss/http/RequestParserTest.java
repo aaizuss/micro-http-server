@@ -1,7 +1,5 @@
 package com.aaizuss.http;
 
-import com.aaizuss.http.Request;
-import com.aaizuss.http.RequestParser;
 import org.junit.Before;
 import org.junit.Test;
 

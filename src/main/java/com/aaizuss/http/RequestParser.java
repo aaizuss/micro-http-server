@@ -8,10 +8,9 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 
 public class RequestParser {
-    private Request request;
 
     public Request parseRequest(BufferedReader reader) throws IOException {
-        parseRequestLine(reader);
+        Request request = parseRequestLine(reader);
         parseHeaders(request, getHeaders(reader));
         if (hasBody(request)) {
             parseBody(request, reader);
@@ -19,7 +18,7 @@ public class RequestParser {
         return request;
     }
 
-    private void parseRequestLine(BufferedReader reader) throws IOException {
+    private Request parseRequestLine(BufferedReader reader) throws IOException {
         String requestLine = reader.readLine();
         if (requestLine != null) {
             String[] parts = requestLine.split(" ");
@@ -27,11 +26,12 @@ public class RequestParser {
             String uri = parts[1];
             String httpVersion = parts[2];
             if (hasParams(uri)) {
-                request = createRequestWithParams(method, uri, httpVersion);
+                return createRequestWithParams(method, uri, httpVersion);
             } else {
-                request = new Request(method, uri, httpVersion);
+                return new Request(method, uri, httpVersion);
             }
         }
+        throw new IOException();
     }
 
     private ArrayList<String> getHeaders(BufferedReader reader) throws IOException {
