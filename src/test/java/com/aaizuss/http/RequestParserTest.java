@@ -1,7 +1,9 @@
 package com.aaizuss.http;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -15,11 +17,18 @@ public class RequestParserTest {
     private BufferedReader reader = getReaderForSimpleRequest();
     private BufferedReader postReader = getReaderForPostRequest();
     private BufferedReader paramsReader = getReaderForParamRequest();
+    private BufferedReader malformedRequest = getReaderForMalformedRequest();
 
     private BufferedReader getReaderForSimpleRequest() {
         String requestLine = "GET /path/to/file/index.html HTTP/1.1\n";
         String headers = "Host: www.example.com\nAccept-Language: en-us\n";
         String request = requestLine + headers;
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(request.getBytes());
+        return new BufferedReader(new InputStreamReader(inputStream));
+    }
+
+    private BufferedReader getReaderForMalformedRequest() {
+        String request = "GET/path/to/file HTTP/1.1\n";
         ByteArrayInputStream inputStream = new ByteArrayInputStream(request.getBytes());
         return new BufferedReader(new InputStreamReader(inputStream));
     }
@@ -41,31 +50,54 @@ public class RequestParserTest {
         return new BufferedReader(new InputStreamReader(requestWithParamsStream));
     }
 
+    private BufferedReader getReaderForMalformedHeaderRequest() {
+        String requestLine = "GET /path/to/file HTTP/1.1\n";
+        String badHeaders = "Content-Type:image/gif\r\n\r\n";
+        String request = requestLine + badHeaders;
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(request.getBytes());
+        return new BufferedReader(new InputStreamReader(inputStream));
+    }
+
     @Before
     public void setUp() throws Exception {
         parser = new RequestParser();
     }
 
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
     @Test
-    public void testParsesMethod() throws IOException {
+    public void testThrowsMalformedRequestForBadRequest() throws IOException, MalformedRequestException {
+        thrown.expect(MalformedRequestException.class);
+        Request request = parser.parseRequest(malformedRequest);
+    }
+
+    @Test
+    public void testMalformedHeaders() throws IOException, MalformedRequestException {
+        thrown.expect(MalformedRequestException.class);
+        Request request = parser.parseRequest(getReaderForMalformedHeaderRequest());
+    }
+
+    @Test
+    public void testParsesMethod() throws IOException, MalformedRequestException {
         Request request = parser.parseRequest(reader);
         assertEquals("GET", request.getMethod());
     }
 
     @Test
-    public void testParsesTarget() throws IOException {
+    public void testParsesTarget() throws IOException, MalformedRequestException {
         Request request = parser.parseRequest(reader);
         assertEquals("/path/to/file/index.html", request.getUri());
     }
 
     @Test
-    public void testParsesVersion() throws IOException {
+    public void testParsesVersion() throws IOException, MalformedRequestException {
         Request request = parser.parseRequest(reader);
         assertEquals("HTTP/1.1", request.getHttpVersion());
     }
 
     @Test
-    public void testParsesRequest() throws IOException {
+    public void testParsesRequest() throws IOException, MalformedRequestException {
         Request request = parser.parseRequest(reader);
 
         assertEquals("/path/to/file/index.html", request.getUri());
@@ -74,7 +106,7 @@ public class RequestParserTest {
     }
 
     @Test
-    public void testParsesRequestWithBody() throws IOException {
+    public void testParsesRequestWithBody() throws IOException, MalformedRequestException {
         Request request = parser.parseRequest(postReader);
 
         assertEquals("/", request.getUri());
@@ -85,7 +117,7 @@ public class RequestParserTest {
     }
 
     @Test
-    public void testParsesRequestWithParams() throws IOException {
+    public void testParsesRequestWithParams() throws IOException, MalformedRequestException {
         Request request = parser.parseRequest(paramsReader);
         String decodedParams = "variable_1 = Operators <, >, =, !=; +, -, *, &, @, #, $, [, ]: \"is that all\"?\nvariable_2 = stuff";
         assertEquals(decodedParams, request.getParams());

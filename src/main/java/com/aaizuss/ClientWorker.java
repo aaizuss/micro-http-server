@@ -28,6 +28,9 @@ public class ClientWorker implements Runnable {
             closeIO();
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (MalformedRequestException e) {
+            respondToMalformedRequest();
+            closeIO();
         } finally {
             closeSocket();
         }
@@ -39,7 +42,13 @@ public class ClientWorker implements Runnable {
         writer.write(serializer.getResponseBytes());
     }
 
-    private Request buildRequestFromInput() throws IOException {
+    private void respondToMalformedRequest() {
+        Response response = new Response(Status.BAD_REQUEST);
+        ResponseSerializer serializer = new ResponseSerializer(response);
+        writer.write(serializer.getResponseBytes());
+    }
+
+    private Request buildRequestFromInput() throws IOException, MalformedRequestException {
         RequestParser parser = new RequestParser();
         return parser.parseRequest(reader);
     }

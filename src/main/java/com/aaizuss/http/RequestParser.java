@@ -9,7 +9,7 @@ import java.util.Hashtable;
 
 public class RequestParser {
 
-    public Request parseRequest(BufferedReader reader) throws IOException {
+    public Request parseRequest(BufferedReader reader) throws IOException, MalformedRequestException {
         Request request = parseRequestLine(reader);
         parseHeaders(request, getHeaders(reader));
         if (hasBody(request)) {
@@ -18,10 +18,13 @@ public class RequestParser {
         return request;
     }
 
-    private Request parseRequestLine(BufferedReader reader) throws IOException {
+    private Request parseRequestLine(BufferedReader reader) throws IOException, MalformedRequestException {
         String requestLine = reader.readLine();
         if (requestLine != null) {
             String[] parts = requestLine.split(" ");
+            if (parts.length != 3) {
+                throw new MalformedRequestException();
+            }
             String method = parts[0];
             String uri = parts[1];
             String httpVersion = parts[2];
@@ -45,9 +48,12 @@ public class RequestParser {
         return headerLines;
     }
 
-    private void parseHeaders(Request request, ArrayList<String> headers) {
+    private void parseHeaders(Request request, ArrayList<String> headers) throws MalformedRequestException {
         for (String header : headers) {
             String[] pair = header.split(": ");
+            if (pair.length != 2) {
+                throw new MalformedRequestException();
+            }
             String key = pair[0];
             String value = pair[1];
             request.addHeader(key, value);
