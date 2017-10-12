@@ -1,4 +1,4 @@
-package com.aaizuss;
+package com.aaizuss.http;
 
 public class InvalidCookieException extends Exception {
     public InvalidCookieException() {
