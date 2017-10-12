@@ -80,4 +80,11 @@ public class RequestTest {
 
         assertTrue(request.isPartial());
     }
+
+    @Test
+    public void testGetParams() {
+        Request request = new Request(RequestMethods.GET, "/cookie", "type=chocolate", "HTTP/1.1");
+        assertEquals("type=chocolate", request.getParams());
+
+    }
 }

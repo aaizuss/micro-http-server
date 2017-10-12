@@ -8,4 +8,6 @@ public class Header {
     public static final String ALLOW = "Allow";
     public static final String LOCATION = "Location";
     public static final String IF_MATCH = "If-Match";
+    public static final String SET_COOKIE = "Set-Cookie";
+    public static final String COOKIE = "Cookie";
 }

@@ -15,4 +15,12 @@ public class ParameterDecoderTest {
         String expected = "variable_1 = Operators <, >, =, !=; +, -, *, &, @, #, $, [, ]: \"is that all\"?\nvariable_2 = stuff";
         Assert.assertEquals(expected, ParameterDecoder.decode(lotsOfParams));
     }
+
+    @Test
+    public void testSimpleDecode() {
+        String params = "type=chocolate";
+
+        String expected = "type = chocolate";
+        Assert.assertEquals(expected, ParameterDecoder.decode(params));
+    }
 }
