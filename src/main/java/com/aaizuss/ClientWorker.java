@@ -50,15 +50,6 @@ public class ClientWorker implements Runnable {
         return parser.parseRequest(reader);
     }
 
-//    private void setupRequestReader() {
-//        try {
-//            this.reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-//        } catch (IOException e) {
-//            System.err.println("Cannot get input stream");
-//            e.printStackTrace();
-//        }
-//    }
-
     private void closeSocket() {
         try {
             socket.close();

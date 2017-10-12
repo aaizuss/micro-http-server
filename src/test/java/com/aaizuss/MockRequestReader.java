@@ -13,12 +13,6 @@ public class MockRequestReader implements Reader {
         this.reader = new BufferedReader(new InputStreamReader(inputStream));
     }
 
-    public MockRequestReader(String requestLine, String headers) {
-        String request = requestLine + headers;
-        ByteArrayInputStream inputStream = new ByteArrayInputStream(request.getBytes());
-        this.reader = new BufferedReader(new InputStreamReader(inputStream));
-    }
-
     public void close() {
         try {
             reader.close();
