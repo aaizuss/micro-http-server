@@ -1,4 +1,4 @@
-package com.aaizuss;
+package com.aaizuss.http;
 
 public class Header {
     public static final String CONTENT_LENGTH = "Content-Length";

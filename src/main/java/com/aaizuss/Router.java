@@ -1,43 +1,48 @@
 package com.aaizuss;
 
 import com.aaizuss.handler.Handler;
+import com.aaizuss.handler.MissingRouteHandler;
 import com.aaizuss.http.Request;
 import com.aaizuss.http.Response;
 
 import java.util.Hashtable;
 
 public class Router {
-    private Hashtable<String,Handler> routes; // not sure if i want values to be Handler or Response - probably handler...
+    private Hashtable<String,Handler> routes;
 
     public Router() {
         this.routes = new Hashtable<>();
     }
 
-    public Router(Hashtable<String,Handler> routes) {
-        this.routes = routes;
-    }
-
     public Response getResponse(Request request) {
         Handler handler = getHandler(request);
         if (handler == null) {
-            return new Response(Status.NOT_FOUND);
+            handler = new MissingRouteHandler();
         }
         return handler.execute(request);
     }
 
-    public Handler getHandler(Request request) {
+    public String createKey(String method, String uri) {
+        return method + " " + uri;
+    }
+
+    public String createKey(Request request) {
         String uri = request.getUri();
         String method = request.getMethod();
-        String key = method + " " + uri;
-        return routes.get(key);
+        return createKey(method, uri);
     }
 
     public void addRoute(String method, String uri, Handler handler) {
-        String key = method + " " + uri;
+        String key = createKey(method, uri);
         routes.put(key, handler);
     }
 
     public Hashtable<String, Handler> getRoutes() {
         return routes;
+    }
+
+    private Handler getHandler(Request request) {
+        String key = createKey(request);
+        return routes.get(key);
     }
 }

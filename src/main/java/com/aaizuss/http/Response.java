@@ -8,9 +8,7 @@ public class Response {
     private Hashtable<String, String> headers;
 
     public Response(String status, byte[] body) {
-        this.status = status;
-        this.body = body;
-        this.headers = new Hashtable<>();
+        this(status, new Hashtable<>(), body);
     }
 
     public Response(String status, Hashtable<String,String> headers, byte[] body) {
@@ -20,14 +18,11 @@ public class Response {
     }
 
     public Response(String status) {
-        this.status = status;
-        this.headers = new Hashtable<>();
-        this.body = "".getBytes();
+        this(status, new Hashtable<>(), "".getBytes());
     }
 
     public Response() {
-        this.headers = new Hashtable<>();
-        this.body = "".getBytes();
+        this("", new Hashtable<>(), "".getBytes());
     }
 
     public void setStatus(String status) {

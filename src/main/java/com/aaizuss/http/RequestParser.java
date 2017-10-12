@@ -1,18 +1,16 @@
 package com.aaizuss.http;
 
-import com.aaizuss.Header;
+import com.aaizuss.io.Reader;
 import com.aaizuss.decoder.ParameterDecoder;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
 public class RequestParser {
-    private Request request;
 
-    public Request parseRequest(BufferedReader reader) throws IOException {
-        parseRequestLine(reader);
+    public Request parseRequest(Reader reader) throws IOException, MalformedRequestException {
+        Request request = parseRequestLine(reader);
         parseHeaders(request, getHeaders(reader));
         if (hasBody(request)) {
             parseBody(request, reader);
@@ -20,22 +18,26 @@ public class RequestParser {
         return request;
     }
 
-    private void parseRequestLine(BufferedReader reader) throws IOException {
+    private Request parseRequestLine(Reader reader) throws IOException, MalformedRequestException {
         String requestLine = reader.readLine();
         if (requestLine != null) {
             String[] parts = requestLine.split(" ");
+            if (parts.length != 3) {
+                throw new MalformedRequestException();
+            }
             String method = parts[0];
             String uri = parts[1];
             String httpVersion = parts[2];
             if (hasParams(uri)) {
-                request = createRequestWithParams(method, uri, httpVersion);
+                return createRequestWithParams(method, uri, httpVersion);
             } else {
-                request = new Request(method, uri, httpVersion);
+                return new Request(method, uri, httpVersion);
             }
         }
+        throw new IOException();
     }
 
-    private ArrayList<String> getHeaders(BufferedReader reader) throws IOException {
+    private ArrayList<String> getHeaders(Reader reader) throws IOException {
         ArrayList<String> headerLines = new ArrayList<>();
         for(String line = reader.readLine(); line != null; line = reader.readLine()) {
             if(line.isEmpty()) {
@@ -46,16 +48,19 @@ public class RequestParser {
         return headerLines;
     }
 
-    private void parseHeaders(Request request, ArrayList<String> headers) {
+    private void parseHeaders(Request request, ArrayList<String> headers) throws MalformedRequestException {
         for (String header : headers) {
             String[] pair = header.split(": ");
+            if (pair.length != 2) {
+                throw new MalformedRequestException();
+            }
             String key = pair[0];
             String value = pair[1];
             request.addHeader(key, value);
         }
     }
 
-    private void parseBody(Request request, BufferedReader reader) throws IOException {
+    private void parseBody(Request request, Reader reader) throws IOException {
         Hashtable<String, String> headers = request.getHeaders();
         int contentLength = Integer.parseInt(headers.get(Header.CONTENT_LENGTH));
         char[] body = new char[contentLength];
