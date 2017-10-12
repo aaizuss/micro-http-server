@@ -1,7 +1,7 @@
-package com.aaizuss.socket;
+package com.aaizuss.io.socket;
 
-import com.aaizuss.Reader;
-import com.aaizuss.Writer;
+import com.aaizuss.io.Reader;
+import com.aaizuss.io.Writer;
 
 import java.io.IOException;
 import java.io.InputStream;

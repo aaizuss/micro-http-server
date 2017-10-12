@@ -1,6 +1,6 @@
 package com.aaizuss.http;
 
-import com.aaizuss.Reader;
+import com.aaizuss.io.Reader;
 import com.aaizuss.decoder.ParameterDecoder;
 
 import java.io.IOException;

@@ -1,9 +1,9 @@
-package com.aaizuss.socket;
+package com.aaizuss.io.socket;
 
-import com.aaizuss.Reader;
-import com.aaizuss.RequestReader;
-import com.aaizuss.ResponseWriter;
-import com.aaizuss.Writer;
+import com.aaizuss.io.Reader;
+import com.aaizuss.io.RequestReader;
+import com.aaizuss.io.ResponseWriter;
+import com.aaizuss.io.Writer;
 
 import java.io.IOException;
 import java.io.InputStream;

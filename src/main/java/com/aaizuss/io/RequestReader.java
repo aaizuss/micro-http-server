@@ -1,12 +1,10 @@
-package com.aaizuss;
+package com.aaizuss.io;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 
-// possibly use this to replace BufferedReader in RequestParser and ClientWorker
-// but then RequestParser is hard to test :(
 public class RequestReader implements Reader {
     private BufferedReader reader;
     private Socket socket;

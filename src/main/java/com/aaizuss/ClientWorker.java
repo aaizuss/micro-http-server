@@ -1,7 +1,9 @@
 package com.aaizuss;
 
 import com.aaizuss.http.*;
-import com.aaizuss.socket.SocketService;
+import com.aaizuss.io.Reader;
+import com.aaizuss.io.Writer;
+import com.aaizuss.io.socket.SocketService;
 import java.io.IOException;
 
 public class ClientWorker implements Runnable {

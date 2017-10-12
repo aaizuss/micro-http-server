@@ -1,9 +1,10 @@
 package com.aaizuss;
 
 import com.aaizuss.http.Status;
+import com.aaizuss.io.Writer;
 import com.aaizuss.mock.MockHandler;
 import com.aaizuss.mock.MockSocket;
-import com.aaizuss.socket.SocketService;
+import com.aaizuss.io.socket.SocketService;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -56,6 +57,14 @@ public class ClientWorkerTest {
         clientWorker.run();
 
         assertEquals("HTTP/1.1 405 Method Not Allowed\r\n\r\n", new String(writer.getContent()));
+    }
+
+    @Test
+    public void testGracefullyRespondsWhenMissingRoute() throws IOException {
+        setUpWorker("POST / HTTP/1.1");
+        clientWorker.run();
+
+        assertEquals("HTTP/1.1 404 Not Found\r\n\r\n", new String(writer.getContent()));
     }
 
     @Test

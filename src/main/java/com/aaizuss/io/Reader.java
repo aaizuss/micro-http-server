@@ -1,4 +1,4 @@
-package com.aaizuss;
+package com.aaizuss.io;
 
 import java.io.IOException;
 

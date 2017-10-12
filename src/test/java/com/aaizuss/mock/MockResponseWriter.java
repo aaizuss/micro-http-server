@@ -1,6 +1,6 @@
 package com.aaizuss.mock;
 
-import com.aaizuss.Writer;
+import com.aaizuss.io.Writer;
 import com.aaizuss.http.Response;
 import com.aaizuss.http.ResponseSerializer;
 
