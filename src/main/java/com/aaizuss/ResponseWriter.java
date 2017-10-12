@@ -4,18 +4,17 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
-public class ResponseWriter {
+public class ResponseWriter implements Writer {
 
     private DataOutputStream writer;
 
-    public ResponseWriter(Socket socket) {
+    public void setup(Socket socket) {
         try {
             writer = new DataOutputStream(socket.getOutputStream());
         } catch (IOException e) {
             System.err.println("Can't open output stream");
             e.printStackTrace();
         }
-
     }
 
     public void close() {

@@ -1,6 +1,8 @@
 package com.aaizuss;
 
 import com.aaizuss.http.*;
+import com.aaizuss.socket.SocketService;
+import com.aaizuss.socket.SocketWrapper;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,16 +11,16 @@ import java.net.Socket;
 
 public class ClientWorker implements Runnable {
 
-    private Socket socket;
-    private BufferedReader reader;
-    private ResponseWriter writer;
+    private SocketService socket;
+    private Reader reader;
+    private Writer writer;
     private Router router;
 
-    public ClientWorker(Socket clientSocket, Router router) {
+    public ClientWorker(SocketService clientSocket, Router router) {
         this.socket = clientSocket;
-        this.writer = new ResponseWriter(socket);
+        this.writer = clientSocket.getResponseWriter();
+        this.reader = clientSocket.getRequestReader();
         this.router = router;
-        setupRequestReader();
     }
 
     public void run() {
@@ -53,14 +55,14 @@ public class ClientWorker implements Runnable {
         return parser.parseRequest(reader);
     }
 
-    private void setupRequestReader() {
-        try {
-            this.reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        } catch (IOException e) {
-            System.err.println("Cannot get input stream");
-            e.printStackTrace();
-        }
-    }
+//    private void setupRequestReader() {
+//        try {
+//            this.reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+//        } catch (IOException e) {
+//            System.err.println("Cannot get input stream");
+//            e.printStackTrace();
+//        }
+//    }
 
     private void closeSocket() {
         try {
@@ -73,11 +75,6 @@ public class ClientWorker implements Runnable {
 
     private void closeIO() {
         writer.close();
-        try {
-            reader.close();
-        } catch (IOException e) {
-            System.err.println("Cannot close request reader");
-            e.printStackTrace();
-        }
+        reader.close();
     }
 }

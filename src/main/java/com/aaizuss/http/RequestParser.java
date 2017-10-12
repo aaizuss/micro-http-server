@@ -1,15 +1,15 @@
 package com.aaizuss.http;
 
+import com.aaizuss.Reader;
 import com.aaizuss.decoder.ParameterDecoder;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
 public class RequestParser {
 
-    public Request parseRequest(BufferedReader reader) throws IOException, MalformedRequestException {
+    public Request parseRequest(Reader reader) throws IOException, MalformedRequestException {
         Request request = parseRequestLine(reader);
         parseHeaders(request, getHeaders(reader));
         if (hasBody(request)) {
@@ -18,7 +18,7 @@ public class RequestParser {
         return request;
     }
 
-    private Request parseRequestLine(BufferedReader reader) throws IOException, MalformedRequestException {
+    private Request parseRequestLine(Reader reader) throws IOException, MalformedRequestException {
         String requestLine = reader.readLine();
         if (requestLine != null) {
             String[] parts = requestLine.split(" ");
@@ -37,7 +37,7 @@ public class RequestParser {
         throw new IOException();
     }
 
-    private ArrayList<String> getHeaders(BufferedReader reader) throws IOException {
+    private ArrayList<String> getHeaders(Reader reader) throws IOException {
         ArrayList<String> headerLines = new ArrayList<>();
         for(String line = reader.readLine(); line != null; line = reader.readLine()) {
             if(line.isEmpty()) {
@@ -60,7 +60,7 @@ public class RequestParser {
         }
     }
 
-    private void parseBody(Request request, BufferedReader reader) throws IOException {
+    private void parseBody(Request request, Reader reader) throws IOException {
         Hashtable<String, String> headers = request.getHeaders();
         int contentLength = Integer.parseInt(headers.get(Header.CONTENT_LENGTH));
         char[] body = new char[contentLength];
