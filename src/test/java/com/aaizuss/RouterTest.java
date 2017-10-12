@@ -3,6 +3,7 @@ package com.aaizuss;
 import com.aaizuss.http.Request;
 import com.aaizuss.http.Response;
 import com.aaizuss.http.Status;
+import com.aaizuss.mock.MockHandler;
 import org.junit.Before;
 import org.junit.Test;
 

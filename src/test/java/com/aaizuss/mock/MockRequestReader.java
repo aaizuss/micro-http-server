@@ -1,4 +1,6 @@
-package com.aaizuss;
+package com.aaizuss.mock;
+
+import com.aaizuss.Reader;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;

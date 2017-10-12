@@ -1,6 +1,6 @@
 package com.aaizuss.http;
 
-import com.aaizuss.MockRequestReader;
+import com.aaizuss.mock.MockRequestReader;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;

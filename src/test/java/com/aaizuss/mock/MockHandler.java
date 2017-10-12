@@ -1,4 +1,4 @@
-package com.aaizuss;
+package com.aaizuss.mock;
 
 import com.aaizuss.handler.Handler;
 import com.aaizuss.http.Request;

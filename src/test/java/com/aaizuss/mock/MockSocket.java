@@ -1,15 +1,15 @@
-package com.aaizuss;
+package com.aaizuss.mock;
 
+import com.aaizuss.Writer;
 import com.aaizuss.http.Response;
 import com.aaizuss.http.Status;
 import com.aaizuss.socket.SocketService;
 
-import java.io.*;
 import java.net.Socket;
 
 public class MockSocket extends Socket implements SocketService {
-    private Reader reader;
-    private Writer writer;
+    private com.aaizuss.Reader reader;
+    private com.aaizuss.Writer writer;
     private Response sampleResponse = new Response(Status.OK);
     private String rawRequest;
     private boolean isClosed;
@@ -29,7 +29,7 @@ public class MockSocket extends Socket implements SocketService {
         this.isClosed = false;
     }
 
-    public Reader getRequestReader() {
+    public com.aaizuss.Reader getRequestReader() {
         return reader;
     }
 
