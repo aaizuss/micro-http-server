@@ -53,6 +53,12 @@ public class RequestTest {
     }
 
     @Test
+    public void testGetHeaderWhenHeaderDoesNotExistReturnsNull() {
+        request.addHeader("Content-Type", "text/plain");
+        assertEquals(null, request.getHeader("Content-Length"));
+    }
+
+    @Test
     public void testGetBodyNoBody() {
         assertEquals("", request.getBody());
     }
