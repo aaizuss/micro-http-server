@@ -3,6 +3,7 @@ package com.aaizuss.http;
 public class Status {
     public static final String OK = "HTTP/1.1 200 OK";
     public static final String BAD_REQUEST = "HTTP/1.1 400 Bad Request";
+    public static final String UNAUTHORIZED = "HTTP/1.1 401 Unauthorized";
     public static final String NOT_FOUND = "HTTP/1.1 404 Not Found";
     public static final String CREATED = "HTTP/1.1 201 Created";
     public static final String NO_CONTENT = "HTTP/1.1 204 No Content";
