@@ -24,12 +24,10 @@ public class ClientWorker implements Runnable {
         try {
             Request request = buildRequestFromInput();
             respondToRequest(request);
-            closeIO();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (MalformedRequestException e) {
             respondToMalformedRequest();
-            closeIO();
         } finally {
             closeSocket();
         }
@@ -59,10 +57,5 @@ public class ClientWorker implements Runnable {
             System.err.println("Unable to close client socket");
             e.printStackTrace();
         }
-    }
-
-    private void closeIO() {
-        writer.close();
-        reader.close();
     }
 }

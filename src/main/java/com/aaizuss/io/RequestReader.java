@@ -7,7 +7,6 @@ import java.net.Socket;
 
 public class RequestReader implements Reader {
     private BufferedReader reader;
-    private Socket socket;
 
     public RequestReader(Socket socket) {
         try {
@@ -21,7 +20,6 @@ public class RequestReader implements Reader {
     public void close() {
         try {
             reader.close();
-            // socket.close(); don't know if this should happen here
         } catch (IOException e) {
             System.err.println("Cannot close request reader");
             e.printStackTrace();
