@@ -10,4 +10,6 @@ public class Header {
     public static final String IF_MATCH = "If-Match";
     public static final String SET_COOKIE = "Set-Cookie";
     public static final String COOKIE = "Cookie";
+    public static final String AUTHORIZATION = "Authorization";
+    public static final String WWW_AUTHORIZATION = "WWW-Authenticate";
 }
