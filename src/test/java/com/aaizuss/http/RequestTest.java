@@ -93,4 +93,16 @@ public class RequestTest {
         assertEquals("type=chocolate", request.getParams());
 
     }
+
+    @Test
+    public void testGivenRequestWithNoParamsToStringReturnsRequestLine() {
+        Request request = new Request(RequestMethods.GET, "/log");
+        assertEquals("GET /log HTTP/1.1", request.toString());
+    }
+
+    @Test
+    public void testGivenRequestWithParamsStringReturnsRequestLinesAndParams() {
+        Request request = new Request(RequestMethods.GET, "/cookie", "type=chocolate", "HTTP/1.1");
+        assertEquals("GET /cookie HTTP/1.1\nParams: type=chocolate", request.toString());
+    }
 }
