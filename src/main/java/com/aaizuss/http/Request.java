@@ -120,6 +120,15 @@ public class Request {
     }
 
     @Override
+    public String toString() {
+        String requestLine = getMethod() + " " + getUri() + " " + getHttpVersion();
+        if (getParams().length() > 0) {
+            requestLine += "\nParams: " + getParams();
+        }
+        return requestLine;
+    }
+
+    @Override
     public boolean equals(Object o) {
         if(o == this) return true;
         if (!(o instanceof Request)) {
