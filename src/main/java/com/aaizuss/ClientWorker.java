@@ -29,6 +29,8 @@ public class ClientWorker implements Runnable {
         } catch (MalformedRequestException e) {
             respondToMalformedRequest();
         } finally {
+            writer.close();
+            reader.close();
             closeSocket();
         }
     }
