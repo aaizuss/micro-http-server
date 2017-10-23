@@ -14,4 +14,6 @@ This is a very simple HTTP Server written in Java. My [cobspec](https://github.c
 * `mvn test`
 
 ## Usage
-~ Info coming soon ~
+You can include this library with Clojars:
+
+[![Clojars Project](https://img.shields.io/clojars/v/com.aaizuss/micro-server.svg)](https://clojars.org/com.aaizuss/micro-server)
