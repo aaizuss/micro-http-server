@@ -9,7 +9,8 @@ public class FileDirectory implements ResourceStore {
     private String pathString;
     private ArrayList<String> resources = new ArrayList<>();
 
-    public FileDirectory(String absolutePath) {
+    public FileDirectory(String absolutePath) throws FileDirectoryNotFoundException {
+        checkDirectoryExists(absolutePath);
         this.pathString = formatPathString(absolutePath);
         this.resources = initResources(pathString);
     }
@@ -79,5 +80,12 @@ public class FileDirectory implements ResourceStore {
             fileList.add(entry);
         }
         return fileList;
+    }
+
+    private void checkDirectoryExists(String directoryPath) throws FileDirectoryNotFoundException {
+        File file = new File(directoryPath);
+        if (!file.exists()) {
+            throw new FileDirectoryNotFoundException(directoryPath);
+        }
     }
 }

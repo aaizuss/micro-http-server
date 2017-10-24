@@ -20,7 +20,7 @@ public class FileDirectoryTest {
     public static TemporaryFolder myTempFolder = new TemporaryFolder();
 
     @BeforeClass
-    public static void setUp() throws IOException {
+    public static void setUp() throws IOException, FileDirectoryNotFoundException {
         TemporaryTestDirectory.populate(myTempFolder);
         directory = new FileDirectory(myTempFolder.getRoot().getPath());
     }
