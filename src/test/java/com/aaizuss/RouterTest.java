@@ -20,6 +20,18 @@ public class RouterTest {
     }
 
     @Test
+    public void usesDefaultHandlerWhenNoRoute() {
+        MockHandler mockHandler = new MockHandler(Status.FOUND);
+        Router router = new Router(mockHandler);
+        assertEquals(Status.FOUND, router.getResponse(request).getStatus());
+    }
+
+    @Test
+    public void givenNoDefaultHandlerUsesMissingRouteHandler() {
+        assertEquals(Status.NOT_FOUND, router.getResponse(request).getStatus());
+    }
+
+    @Test
     public void testCreateKey() {
         String expected = ("POST /form");
         assertEquals(expected, router.createKey(postRequest));
