@@ -2,7 +2,9 @@ package com.aaizuss.ResourceStore;
 
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
 
 import java.io.IOException;
@@ -23,6 +25,16 @@ public class FileDirectoryTest {
     public static void setUp() throws IOException, FileDirectoryNotFoundException {
         TemporaryTestDirectory.populate(myTempFolder);
         directory = new FileDirectory(myTempFolder.getRoot().getPath());
+    }
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
+    @Test
+    public void throwsExceptionForNonExistentDirectory() throws FileDirectoryNotFoundException {
+        thrown.expect(FileDirectoryNotFoundException.class);
+        thrown.expectMessage("Cannot find directory /foo!");
+        FileDirectory directory = new FileDirectory("/foo");
     }
 
     @Test
