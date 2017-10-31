@@ -9,6 +9,8 @@ public class Status {
     public static final String NO_CONTENT = "HTTP/1.1 204 No Content";
     public static final String PARTIAL = "HTTP/1.1 206 Partial Content";
     public static final String FOUND = "HTTP/1.1 302 Found";
+    public static final String FORBIDDEN = "HTTP/1.1 403 Forbidden";
+    public static final String CONFLICT = "HTTP/1.1 409 Conflict";
     public static final String UNSUPPORTED_MEDIA_TYPE = "HTTP/1.1 415 Unsupported Media Type";
     public static final String PRECONDITION_FAILED = "HTTP/1.1 412 Precondition Failed";
     public static final String COFFEE_POT = "HTTP/1.1 418";
