@@ -9,15 +9,22 @@ import java.util.Hashtable;
 
 public class Router {
     private Hashtable<String,Handler> routes;
+    private Handler defaultHandler;
 
     public Router() {
         this.routes = new Hashtable<>();
+        this.defaultHandler = new MissingRouteHandler();
+    }
+
+    public Router(Handler defaultHandler) {
+        this.routes = new Hashtable<>();
+        this.defaultHandler = defaultHandler;
     }
 
     public Response getResponse(Request request) {
         Handler handler = getHandler(request);
         if (handler == null) {
-            handler = new MissingRouteHandler();
+            handler = defaultHandler;
         }
         return handler.execute(request);
     }
